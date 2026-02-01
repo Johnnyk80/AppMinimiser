@@ -1,162 +1,124 @@
-# AppMinimiser
-AppMinimiser
-App Auto-Minimiser
+# App Auto-Minimiser (Windows)
 
-A lightweight Windows utility that automatically minimises and hides selected applications after launch — perfect for keeping launchers, updaters, and background apps out of your taskbar while they load or run.
+A lightweight Windows utility that automatically **minimises or hides applications**
+after they appear, based on their window title.  
+Runs quietly in the **system tray** and works in the background.
 
-Runs quietly in the system tray and is fully configurable via a simple GUI.
+Perfect for launchers, pop-ups, splash screens, or apps you don’t want stealing focus.
 
-✨ Features
+---
 
-🕒 Delay-based actions (wait X seconds after a window appears)
+## ✨ Features
 
-🪟 Match apps by window title
+- Automatically minimise or **minimise + hide from taskbar**
+- Match apps by **window title text** (case-insensitive)
+- Adjustable delay before action triggers
+- Runs silently in the **system tray**
+- Simple GUI to manage rules
+- Settings saved locally (`settings.json`)
+- No installer required
 
-🙈 Minimise and hide windows (removed from taskbar, process stays alive)
+---
 
-🔁 Safe for apps that are still loading (no force-closing)
+## 🖥️ Requirements
 
-🧠 Automatically handles window restores / reopens
+- Windows 10 or Windows 11  
+*(This app is Windows-only)*
 
-📌 Runs in the system tray
+---
 
-💾 Settings saved to settings.json
+## ⬇️ Installation (Recommended)
 
-🧩 Portable single-EXE build supported
+### Download the EXE
+1. Go to the **Releases** page
+2. Download the latest `AppAutoMinimiser.exe`
+3. Run the file
 
-🧠 How it works
+> ⚠️ Windows SmartScreen may warn about an unknown publisher.  
+> Click **More info → Run anyway**.
 
-The app watches for newly opened application windows
+No installation, no admin rights required.
 
-When a window matches a configured rule:
+---
 
-waits the specified delay
+## 🚀 How to Use
 
-minimises it
+1. Launch **App Auto-Minimiser**
+2. Click **Add App**
+3. Enter part (or all) of the window title  
+   - Matching is **case-insensitive**
+4. Choose an action:
+   - **Minimise**
+   - **Minimise and Hide**
+5. Set an optional delay (seconds)
+6. Hide the app to the tray — it will keep running
 
-hides it from the taskbar
+The app will now watch for matching windows and apply the chosen action automatically.
 
-The application continues running normally in the background
+---
 
-If the app creates its own tray icon, it will appear as usual
+## 🧠 How Window Matching Works
 
-⚠️ No applications are force-closed. This avoids crashes and broken launchers.
+- Matching is **case-insensitive**
+- The rule triggers when the window title **contains** the text you enter
+- Example:
 
-🖥️ Requirements
+| Rule | Matches |
+|-----|--------|
+| `rockstar` | `Rockstar Games Launcher` |
+| `launcher` | `Epic Games Launcher` |
+| `chrome` | `Google Chrome` |
 
-Windows 10 / 11
+---
 
-Python 3.9+ (if running from source)
+## ⚙️ Tray Controls
 
-Python dependencies:
+Right-click the tray icon to:
+- Open Settings
+- Enable / Disable the watcher
+- Exit the application
 
-pywin32
+Double-click the tray icon to reopen the settings window.
 
-pystray
+---
 
-Pillow
+## 🛠️ Advanced: Run from Source
 
-🚀 Running from source
-pip install pywin32 pystray pillow
+Only needed if you want to modify the app.
+
+### Requirements
+- Python 3.10+
+- Windows
+
+### Run
+```bash
+pip install -r requirements.txt
 python app_auto_minimiser.py
 
-📦 Building a standalone EXE
+📦 Building the EXE Yourself
 
-This app is designed to be packaged with PyInstaller.
+pyinstaller --onefile --windowed app_auto_minimiser.py
 
-Install PyInstaller
-pip install pyinstaller
+The EXE will be created in the dist folder.
+🧾 Settings File
 
-Build command
-pyinstaller --onefile --noconsole app_auto_minimiser.py
-
-
-Optional (recommended for reliability):
-
-pyinstaller --onefile --noconsole ^
-  --hidden-import=win32gui ^
-  --hidden-import=win32con ^
-  --hidden-import=PIL ^
-  app_auto_minimiser.py
-
-
-The EXE will be created in:
-
-dist/app_auto_minimiser.exe
-
-⚙️ Configuration
-
-Settings are stored in:
+Settings are saved automatically to:
 
 settings.json
 
+Located in the same folder as the EXE.
+⚠️ Known Limitations
 
-Example:
+    Windows-only
 
-{
-  "enabled": true,
-  "delay_seconds": 1.5,
-  "tracked_apps": {
-    "steam": "minimise and hide",
-    "epic games launcher": "minimise and hide"
-  }
-}
+    Some system or elevated apps may not respond to minimise commands
 
+    Tray icons for third-party apps depend on how that app implements tray support
 
-Window title matching is not case-insensitive
+📜 License
 
-Titles must match exactly (not partial substrings)
+MIT License — free to use, modify, and distribute.
+💡 Why This Exists
 
-🧭 Usage
-
-Launch the app → it starts hidden in the tray
-
-Double-click the tray icon or choose Open Settings
-
-Add apps by window title
-
-Choose an action (minimise or minimise and hide)
-
-Set a global delay
-
-Close the window — the app stays active in the tray
-
-🧪 Recommended use cases
-
-Game launchers (Steam, Epic, Battle.net)
-
-Updaters and background tools
-
-RGB / peripheral software
-
-Cloud sync utilities
-
-Apps that don’t need to live in the taskbar
-
-⚠️ Limitations
-
-Windows does not allow one app to force another app into the system tray
-
-Hidden windows can only be restored by:
-
-the app’s own tray icon
-
-reopening the app
-
-Console / child windows are ignored by design
-
-🛠️ Future ideas
-
-Restore hidden apps from the GUI
-
-Per-app delays
-
-Partial title matching
-
-Auto-restore after X minutes
-
-Startup with Windows
-
-📄 License
-
-MIT License — feel free to use, modify, and distribute.
+Some apps insist on popping up, stealing focus, or sitting in your taskbar.
+This tool politely tells them to sit down and be quiet.
