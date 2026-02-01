@@ -103,7 +103,7 @@ Example:
 }
 
 
-Window title matching is case-insensitive
+Window title matching is not case-insensitive
 
 Titles must match exactly (not partial substrings)
 
