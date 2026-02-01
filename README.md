@@ -60,15 +60,15 @@ The app will now watch for matching windows and apply the chosen action automati
 ## 🧠 How Window Matching Works
 
 - Matching is **case-insensitive**
-- The rule triggers when the window title **contains** the text you enter
-- Example:
+- The window title must **match exactly**
+- Partial matches are **not** supported
 
-| Rule | Matches |
-|-----|--------|
-| `rockstar` | `Rockstar Games Launcher` |
-| `launcher` | `Epic Games Launcher` |
-| `chrome` | `Google Chrome` |
+### Example
 
+| Rule | Window Title | Result |
+|----|----|----|
+| `rockstar games launcher` | `Rockstar Games Launcher` | ✅ Match |
+| `rockstar` | `Rockstar Games Launcher` | ❌ No match |
 ---
 
 ## ⚙️ Tray Controls
